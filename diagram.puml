@@ -1,0 +1,58 @@
+@startuml 
+
+entity "User" {
+  * UserId : UUID
+  * Name : string
+  * Email : string
+  * PhoneNumber : string
+}
+
+entity "Worker" {
+  * WorkerId : UUID
+  * UserId : UUID
+  * Skill : string
+  * Rating : decimal
+}
+
+entity "Job" {
+  * JobId : UUID
+  * WorkerId : UUID
+  * UserId : UUID
+  * JobType : string
+  * JobStatus : enum {Requested, Accepted, Completed, Cancelled}
+  * JobDate : DateTime
+  * Price : decimal
+}
+
+entity "Notification" {
+  * NotificationId : UUID
+  * UserId : UUID
+  * WorkerId : UUID
+  * Message : string
+  * IsRead : boolean
+  * SentAt : DateTime
+}
+
+entity "Event" {
+  * EventId : UUID
+  * EventType : enum {JobCreated, JobAccepted, JobCompleted, JobCancelled}
+  * Payload : json
+  * CreatedAt : DateTime
+}
+
+entity "EventHandler" {
+  * HandlerId : UUID
+  * EventId : UUID
+  * HandlerType : string
+  * ProcessedAt : DateTime
+}
+
+User ||--o{ Worker : "is"
+User ||--o{ Job : "requests"
+Worker ||--o{ Job : "performs"
+User ||--o{ Notification : "receives"
+Worker ||--o{ Notification : "receives"
+Event ||--o{ EventHandler : "triggers"
+Job ||--o{ Event : "produces"
+
+@enduml
