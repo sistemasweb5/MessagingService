@@ -1,58 +1,24 @@
-@startuml 
+@startuml logic
+actor "User A" as A
+actor "User B" as B
 
-entity "User" {
-  * UserId : UUID
-  * Name : string
-  * Email : string
-  * PhoneNumber : string
+rectangle "Chat System" {
+  A -> "Message Service" : Send Message
+  "Message Service" -> "Event Broker" : Produce Event (MessageSent)
+  
+  rectangle "Event Broker" {
+    rectangle "Kafka/RabbitMQ" {
+      "MessageSent Event" -> "Notification Service" : Send Notification
+      "MessageSent Event" -> "Storage Service" : Save Message
+    }
+  }
+
+  "Notification Service" -> B : Push Notification
+  "Storage Service" -> "Database" : Store Message
+  
+  B -> "Message Service" : Read Message
+  "Message Service" -> "Event Broker" : Produce Event (MessageRead)
+  "MessageRead Event" -> A : Update UI (Message Seen)
 }
-
-entity "Worker" {
-  * WorkerId : UUID
-  * UserId : UUID
-  * Skill : string
-  * Rating : decimal
-}
-
-entity "Job" {
-  * JobId : UUID
-  * WorkerId : UUID
-  * UserId : UUID
-  * JobType : string
-  * JobStatus : enum {Requested, Accepted, Completed, Cancelled}
-  * JobDate : DateTime
-  * Price : decimal
-}
-
-entity "Notification" {
-  * NotificationId : UUID
-  * UserId : UUID
-  * WorkerId : UUID
-  * Message : string
-  * IsRead : boolean
-  * SentAt : DateTime
-}
-
-entity "Event" {
-  * EventId : UUID
-  * EventType : enum {JobCreated, JobAccepted, JobCompleted, JobCancelled}
-  * Payload : json
-  * CreatedAt : DateTime
-}
-
-entity "EventHandler" {
-  * HandlerId : UUID
-  * EventId : UUID
-  * HandlerType : string
-  * ProcessedAt : DateTime
-}
-
-User ||--o{ Worker : "is"
-User ||--o{ Job : "requests"
-Worker ||--o{ Job : "performs"
-User ||--o{ Notification : "receives"
-Worker ||--o{ Notification : "receives"
-Event ||--o{ EventHandler : "triggers"
-Job ||--o{ Event : "produces"
 
 @enduml
