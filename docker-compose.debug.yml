@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  messagingservice:
+    image: messagingservice
+    build:
+      context: .
+      dockerfile: messaging-service/Dockerfile
+      args:
+        - configuration=Debug
+    ports:
+      - 5294:5294
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    volumes:
+      - ~/.vsdbg:/remote_debugger:rw
