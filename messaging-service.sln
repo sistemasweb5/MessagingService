@@ -5,6 +5,10 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "messaging-service", "messaging-service\messaging-service.csproj", "{501D15A3-5900-4E4A-8E8D-643699AC9368}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "producer-kafka", "producer-kafka\producer-kafka.csproj", "{25CCC6D7-34A8-4E32-9176-B298A6A48AC1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "consumer-kafka", "consumer-kafka\consumer-kafka.csproj", "{5BB991A7-32E1-4690-8125-3404AC0B57EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,13 @@ Global
 		{501D15A3-5900-4E4A-8E8D-643699AC9368}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{501D15A3-5900-4E4A-8E8D-643699AC9368}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{501D15A3-5900-4E4A-8E8D-643699AC9368}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25CCC6D7-34A8-4E32-9176-B298A6A48AC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25CCC6D7-34A8-4E32-9176-B298A6A48AC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25CCC6D7-34A8-4E32-9176-B298A6A48AC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25CCC6D7-34A8-4E32-9176-B298A6A48AC1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5BB991A7-32E1-4690-8125-3404AC0B57EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BB991A7-32E1-4690-8125-3404AC0B57EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BB991A7-32E1-4690-8125-3404AC0B57EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BB991A7-32E1-4690-8125-3404AC0B57EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
