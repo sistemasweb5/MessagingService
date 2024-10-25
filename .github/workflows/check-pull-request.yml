@@ -1,0 +1,40 @@
+name: Build and Run Docker for .NET Application
+
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: Set up .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Build .NET project
+      run: |
+        dotnet build messaging-service/messaging-service.csproj --configuration Release
+        dotnet publish messaging-service/messaging-service.csproj --configuration Release --output ./publish
+
+    - name: Build Docker image
+      run: docker build -t messagingservice:latest -f messaging-service/Dockerfile .
+
+    - name: Run Docker container
+      run: |
+        docker run -d -p 5294:5294 --name messagingservice messagingservice:latest
+        sleep 10 # wait for the container to start
+
+    - name: Clean up Docker
+      run: |
+        docker stop messagingservice
+        docker rm messagingservice
