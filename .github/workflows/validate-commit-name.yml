@@ -1,0 +1,25 @@
+name: Validate Commit Message
+
+on:
+  push:
+
+jobs:
+  validate-commit-message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v3
+
+      - name: Validate Commit Messages
+        run: |
+          invalid_commit=false
+          for COMMIT in $(git rev-list --no-merges ${GITHUB_SHA} ^${GITHUB_SHA}~100); do
+            MESSAGE=$(git log -1 --pretty=format:%s "$COMMIT")
+            if [[ ! "$MESSAGE" =~ ^(feat|fix|revert|docs|refactor|chore|test|hotfix|merge branch) ]]; then
+              echo "Invalid commit message: $MESSAGE"
+              invalid_commit=true
+            fi
+          done
+          if [ "$invalid_commit" = true ]; then
+            exit 1
+          fi
