@@ -1,4 +1,4 @@
-namespace messaging_service.Domain;
+namespace MessagingService.src.Domain;
 
 public class Channel
 {
