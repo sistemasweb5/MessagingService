@@ -1,0 +1,71 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f2f5;
+}
+
+.Chat-header {
+  width: 100%;
+  padding: 10px;
+  background-color: #282c34;
+  color: white;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.Chat-messages {
+  flex-grow: 1;
+  width: 100%;
+  padding: 20px;
+  overflow-y: auto;
+  background-color: #ffffff;
+}
+
+.Chat-message {
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+.Chat-message.user {
+  background-color: #e5f7ff;
+  align-self: flex-end;
+}
+
+.Chat-message.other {
+  background-color: #f1f1f1;
+  align-self: flex-start;
+}
+
+.Chat-input {
+  width: 100%;
+  display: flex;
+  padding: 10px;
+  background-color: #282c34;
+}
+
+.Chat-input textarea {
+  flex-grow: 1;
+  resize: none;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.Chat-input button {
+  margin-left: 10px;
+  padding: 10px 20px;
+  color: white;
+  background-color: #61dafb;
+  border: none;
+  border-radius: 5px;
+}
