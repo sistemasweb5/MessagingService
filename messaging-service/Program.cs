@@ -1,15 +1,12 @@
-using MongoDB.Driver;
 using MessagingService.src.Repositories;
+using MessagingService.src.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var mongoConnectionString = builder.Configuration.GetValue<string>("MongoDB:ConnectionString");
-var mongoClient = new MongoClient(mongoConnectionString);
-var database = mongoClient.GetDatabase(builder.Configuration.GetValue<string>("MongoDB:DatabaseName"));
 
-builder.Services.AddSingleton(database);
-
-builder.Services.AddScoped<MessageRepository>();
+builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddEvents();
+builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.SignalR;
-using MessagingService.src.Hubs;
 using MessagingService.src.Domain;
 using MessagingService.src.Events;
 using MessagingService.src.Repositories;

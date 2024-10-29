@@ -11,7 +11,11 @@ public abstract class BaseRepository<T>
         _collection = database.GetCollection<T>(collectionName);
     }
 
-    public async Task InsertAsync(T entity) => await _collection.InsertOneAsync(entity);
+    public async Task<T> InsertAsync(T entity)
+    {
+        await _collection.InsertOneAsync(entity);
+        return entity;
+    }
 
     public async Task<List<T>> GetAllAsync() => await _collection.Find(_ => true).ToListAsync();
 
