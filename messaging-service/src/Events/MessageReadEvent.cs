@@ -5,12 +5,12 @@ public class MessageReadEvent : IEvent
 {
     public Guid MessageId { get; }
     public DateTime EventDate { get; }
-    public Guid ChannerlId { get; }
+    public Guid ChannelId { get; }
 
-    public MessageReadEvent(Guid messageId, Guid channerlId)
+    public MessageReadEvent(Guid messageId, Guid channelId)
     {
         MessageId = messageId;
-        ChannerlId = channerlId;
+        ChannelId = channelId;
         EventDate = DateTime.Now;
     }
 }
