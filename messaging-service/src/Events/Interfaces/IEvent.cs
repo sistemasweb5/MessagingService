@@ -1,4 +1,7 @@
+namespace MessagingService.src.Events.Interfaces;
+
 public interface IEvent
 {
-    DateTime EventDate { get; }
+    Guid Id { get; }
+    DateTime Timestamp { get; }
 }

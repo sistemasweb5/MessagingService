@@ -1,9 +1,12 @@
+using MessagingService.src.Events.Interfaces;
+
 namespace MessagingService.src.Events;
 
 public class MessageSentEvent : IEvent
 {  
+    public Guid Id { get; }
     public string Content { get; }
-    public DateTime EventDate { get; }
+    public DateTime Timestamp { get; }
     public Guid ChannelId { get; }
     public Guid UserId { get; }
 
@@ -12,6 +15,6 @@ public class MessageSentEvent : IEvent
         Content = content;
         ChannelId = channelId;
         UserId = userId;
-        EventDate = DateTime.Now;
+        Timestamp = DateTime.Now;
     }
 }
