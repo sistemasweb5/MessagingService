@@ -8,3 +8,30 @@ services:
       dockerfile: messaging-service/Dockerfile
     ports:
       - 5294:5294
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - MONGO_CONNECTIONSTRING=mongodb://mongo:27017
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      - MONGO_INITDB_DATABASE=MessagingServiceDB     
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=password
+
+  mongo-express:
+    image: mongo-express
+    restart: always
+    ports:
+      - 8081:8081
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=admin
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=password
+    depends_on:
+      - mongo
