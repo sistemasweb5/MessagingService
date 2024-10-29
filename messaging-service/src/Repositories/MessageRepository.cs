@@ -12,4 +12,10 @@ public class MessageRepository : BaseRepository<Message>
         var filter = Builders<Message>.Filter.Eq(m => m.ChannelId, channelId);
         return await _collection.Find(filter).ToListAsync();
     }
+
+    public async Task<Message> SaveMessageAsync(Message message)
+    {
+        await _collection.InsertOneAsync(message);
+        return message;
+    }
 }
