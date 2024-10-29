@@ -6,5 +6,5 @@ public class Message
     public Guid ChannelId { get; set; }
     public Guid UserId { get; set; }
     public required string Content { get; set; }
-    public DateTime SentAt { get; set; }
+    public DateTime Timestamp { get; set; }  
 }
