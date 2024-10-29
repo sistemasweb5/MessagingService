@@ -10,6 +10,7 @@ var database = mongoClient.GetDatabase(builder.Configuration.GetValue<string>("M
 builder.Services.AddSingleton(database);
 
 builder.Services.AddScoped<MessageRepository>();
+builder.Services.AddScoped<ChannelRepository>();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -24,8 +25,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/messages", async (MessageRepository repo) => await repo.GetAllAsync())
+/*app.MapGet("/messages", async (MessageRepository repo) => await repo.GetAllAsync())
    .WithName("GetAllMessages")
    .WithOpenApi();
+
+app.MapGet("/channels", async (ChannelRepository channelRepo) => await channelRepo.GetAllAsync())
+    .WithName("GetAllChannels")
+    .WithOpenApi();*/
 
 app.Run();

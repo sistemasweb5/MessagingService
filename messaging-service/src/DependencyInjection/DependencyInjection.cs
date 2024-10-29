@@ -31,6 +31,8 @@ public static class DependencyInjection
     {
         services.AddSingleton<IEventBus, EventBus>();
         services.AddTransient<NewMessageEventHandler>();
+        services.AddTransient<MesageSentEventHandler>();
+        services.AddTransient<MessageReadEventHandler>();
         services.AddTransient<UserConnectedEventHandler>();
         return services;
     }

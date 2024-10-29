@@ -24,10 +24,12 @@ public static class WebApplicationExtensions
         using (var scope = app.Services.CreateScope())
         {
             var eventBus = scope.ServiceProvider.GetRequiredService<IEventBus>();
-            var messageHandler = scope.ServiceProvider.GetRequiredService<NewMessageEventHandler>();
+            var messageSentHandler = scope.ServiceProvider.GetRequiredService<MesageSentEventHandler>();
+            var messageReadHandler = scope.ServiceProvider.GetRequiredService<MessageReadEventHandler>();
             var userConnectHandler = scope.ServiceProvider.GetRequiredService<UserConnectedEventHandler>();
 
-            eventBus.Subscribe<NewMessageEvent>(messageHandler.Handle);
+            eventBus.Subscribe<MessageSentEvent>(messageSentHandler.Handle);
+            eventBus.Subscribe<MessageReadEvent>(messageReadHandler.Handle);
             eventBus.Subscribe<UserConnectedEvent>(userConnectHandler.Handle);
 
             return app;
